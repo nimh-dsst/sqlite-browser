@@ -10,6 +10,7 @@ A Python/web-based database browser for querying and visualizing SQLite database
 - **SQL Query Execution**: Write and execute custom SQL queries
 - **Results Display**: View query results in an interactive HTML table with SQL preview
 - **Summary**: At-a-glance per-column summary (missingness, unique values, top values, min/max, datatype)
+- **Counts Tab**: Unique categorical combination counts with configurable aggregation columns, per-column sort controls, plus treemap and sunburst category breakdowns
 - **Data Visualization**: Built-in histograms, bar charts, and scatter plots with Plotly
 - **Statistics**: View summary statistics for numeric columns
 - **Export**: Export filtered query results to TSV (including your SQL query)
@@ -74,6 +75,10 @@ The app will start "locally" (only on your computer) on `http://127.0.0.1:8050` 
 
 5. **Analyze Data**:
    - Switch to the "Summary" tab for quick per-column data profiling
+   - Switch to the "Counts" tab to quantify categorical groups:
+     - Use **Aggregate counts by** to choose grouping columns for the combinations table
+     - Use **Asc/Desc** controls to sort by any displayed column (defaults to Count descending)
+     - Use treemap and sunburst visuals to see category distribution across multi-value fields
    - Switch to the "Statistics" tab to see numeric column summaries
    - Switch to "Visualizations" to view simple plots
    - Select a column and visualization type (Histogram/Bar/Scatter)
@@ -83,7 +88,7 @@ The app will start "locally" (only on your computer) on `http://127.0.0.1:8050` 
 The filter builder supports 11 operators for powerful searching:
 
 | Operator | Best For | Example |
-|----------|----------|---------|
+| --- | --- | --- |
 | **equals** | Exact match | `status = "active"` |
 | **does not equal** | Filtering out values | `status != "inactive"` |
 | **like (contains)** | Substring search | `name LIKE "%john%"` |
