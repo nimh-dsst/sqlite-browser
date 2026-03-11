@@ -660,11 +660,11 @@ def build_counts_sunburst(counts_df: pd.DataFrame) -> go.Figure:
 
 
 def build_unique_categorical_combinations(df: pd.DataFrame) -> pd.DataFrame:
-    """Build full unique-combination counts across categorical columns in alphanumeric order."""
+    """Build full unique-combination counts across eligible columns in alphanumeric order."""
     if df.empty:
         return pd.DataFrame()
 
-    categorical_columns = []
+    eligible_columns = []
     missing_tokens = {"", "na", "n/a", "nan", "none", "null"}
 
     for column in df.columns:
@@ -674,21 +674,14 @@ def build_unique_categorical_combinations(df: pd.DataFrame) -> pd.DataFrame:
         non_missing = series[~missing_mask]
         unique_non_missing = int(non_missing.nunique(dropna=True))
 
-        is_categorical_like = (
-            pd.api.types.is_object_dtype(series)
-            or pd.api.types.is_string_dtype(series)
-            or isinstance(series.dtype, pd.CategoricalDtype)
-            or pd.api.types.is_bool_dtype(series)
-        )
+        if unique_non_missing > 1:
+            eligible_columns.append(column)
 
-        if is_categorical_like and unique_non_missing > 1:
-            categorical_columns.append(column)
-
-    if not categorical_columns:
+    if not eligible_columns:
         return pd.DataFrame()
 
     combination_df = pd.DataFrame()
-    for column in categorical_columns:
+    for column in eligible_columns:
         as_text = df[column].astype("string").str.strip()
         normalized = as_text.str.lower()
         cleaned = as_text.where(~normalized.isin(missing_tokens).fillna(False), "(Missing)").fillna("(Missing)")
@@ -696,10 +689,10 @@ def build_unique_categorical_combinations(df: pd.DataFrame) -> pd.DataFrame:
 
     grouped = (
         combination_df
-        .groupby(categorical_columns, dropna=False)
+        .groupby(eligible_columns, dropna=False)
         .size()
         .reset_index(name="Count")
-        .sort_values(by=categorical_columns, ascending=True)
+        .sort_values(by=eligible_columns, ascending=True)
         .reset_index(drop=True)
     )
     return grouped
@@ -2180,7 +2173,7 @@ def update_counts(sql_query, selected_columns, active_tab, db_path):
     category_count = counts_df.shape[0]
 
     combinations_section = html.P(
-        "No categorical columns with >1 unique non-missing value were available for combinations.",
+        "No columns with >1 unique non-missing value were available for combinations.",
         className="small text-muted",
     )
     if not combinations_df.empty:
@@ -2212,11 +2205,11 @@ def update_counts(sql_query, selected_columns, active_tab, db_path):
                 )
             )
 
-        categorical_columns = [col for col in combination_columns if col != "Count"]
-        default_aggregate_columns = categorical_columns[:1]
+        groupable_columns = [col for col in combination_columns if col != "Count"]
+        default_aggregate_columns = groupable_columns[:1]
         combinations_section = html.Div(
             [
-                html.H6("Unique Categorical Combinations (Full Data)", className="mb-2"),
+                html.H6("Unique Value Combinations (Full Data)", className="mb-2"),
                 html.P(
                     "Suggestion: Using less columns in the Column Display toggle above is recommended.",
                     className="small text-muted mb-2",
@@ -2238,7 +2231,7 @@ def update_counts(sql_query, selected_columns, active_tab, db_path):
                         ),
                         dbc.Checklist(
                             id="counts-combo-columns-checklist",
-                            options=[{"label": col, "value": col} for col in categorical_columns],
+                            options=[{"label": col, "value": col} for col in groupable_columns],
                             value=default_aggregate_columns,
                             inline=True,
                             className="mb-2",
