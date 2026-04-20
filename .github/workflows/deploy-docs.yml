@@ -57,12 +57,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-hugomod-
 
-      - name: Download Hugo modules
-        run: hugo mod download
-        working-directory: docs
-        env:
-          HUGO_CACHEDIR: /tmp/hugo_cache
-
       - name: Build Hugo site
         run: hugo --minify
         working-directory: docs
