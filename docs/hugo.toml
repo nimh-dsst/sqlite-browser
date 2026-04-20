@@ -1,0 +1,41 @@
+baseURL = "https://nimh-dsst.github.io/sqlite-browser/"
+title = "SQLite Browser"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+enableMissingTranslationPlaceholders = true
+enableRobotsTXT = true
+enableGitInfo = true
+
+[module]
+  proxy = "direct"
+  [[module.imports]]
+    path = "github.com/google/docsy"
+
+[params]
+  description = "A Plotly Dash web application for exploring SQLite databases."
+  copyright = "NIMH Data Science & Sharing Team"
+  github_repo = "https://github.com/nimh-dsst/sqlite-browser"
+  github_project_repo = "https://github.com/nimh-dsst/sqlite-browser"
+  github_branch = "main"
+
+  [params.ui]
+    navbar_logo = true
+    sidebar_search_disable = false
+    breadcrumb_disable = false
+    footer_about_enable = false
+
+    [params.ui.feedback]
+      enable = false
+
+  [[params.links.user]]
+    name = "GitHub"
+    url = "https://github.com/nimh-dsst/sqlite-browser"
+    icon = "fab fa-github"
+    desc = "View project on GitHub"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = "github"
