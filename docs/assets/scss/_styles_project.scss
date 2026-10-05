@@ -1,2 +1,11 @@
 // Project-specific SCSS style overrides go here.
 // See https://www.docsy.dev/docs/adding-content/lookandfeel/ for more info.
+
+// Landing page cover: white, bold title and lead for contrast on the dark background.
+.td-cover-block {
+  h1,
+  .lead {
+    color: $white;
+    font-weight: 700;
+  }
+}
