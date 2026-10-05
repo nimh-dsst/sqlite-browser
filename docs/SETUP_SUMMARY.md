@@ -5,11 +5,13 @@ This document summarizes the conversion of the dataset-browser project to use `u
 ## What Changed
 
 ### Before
+
 - Used `pip` with `requirements_dash.txt` for package management
 - Manual virtual environment setup
 - Slower dependency resolution
 
 ### After  
+
 - Uses `uv` (fast Rust-based package manager) for all dependencies
 - Automatic virtual environment in `.venv/`
 - Dependencies defined in `pyproject.toml`
@@ -18,6 +20,7 @@ This document summarizes the conversion of the dataset-browser project to use `u
 ## Files Involved
 
 ### Configuration Files
+
 - **`pyproject.toml`** - Project metadata and all dependencies
   - Updated with Dash, Plotly, and Pandas dependencies
   - Python version: 3.13+
@@ -35,6 +38,7 @@ This document summarizes the conversion of the dataset-browser project to use `u
   - Standard Python cache files ignored
 
 ### Application Files
+
 - **`dash_app.py`** - Main Dash application entry point (feature modules live in `src/`; see the README's Project Layout)
   - Fixed import to remove unused `FileSystemStore`
   - All required packages now properly imported and available
@@ -50,6 +54,7 @@ This document summarizes the conversion of the dataset-browser project to use `u
   - Updated usage examples
 
 ### New Documentation
+
 - **`UV_GUIDE.md`** - Complete guide to using uv
   - Common commands and workflows
   - Development practices
@@ -59,6 +64,7 @@ This document summarizes the conversion of the dataset-browser project to use `u
 ## Quick Reference
 
 ### First Time Setup
+
 ```bash
 # Install dependencies
 uv sync
@@ -68,6 +74,7 @@ python quickstart.py
 ```
 
 ### Running the App
+
 ```bash
 # Option 1: Direct uv command
 uv run dash_app.py
@@ -81,6 +88,7 @@ python dash_app.py
 ```
 
 ### Adding New Dependencies
+
 ```bash
 uv add package-name
 ```
@@ -90,6 +98,7 @@ uv add package-name
 The updated setup works seamlessly with the repository:
 
 1. **For users cloning the repo:**
+
    ```bash
    git clone https://github.com/nimh-dsst/dataset-browser.git
    cd dataset-browser
@@ -106,10 +115,9 @@ The updated setup works seamlessly with the repository:
 ## Dependency List
 
 Current project dependencies (from `pyproject.toml`):
+
 - `dash>=3.3.0` - Web application framework
-- `dash-ag-grid>=32.3.2` - Advanced data grid component  
 - `dash-bootstrap-components>=2.0.4` - Bootstrap styling
-- `dash-extensions>=1.0.42` - Additional Dash utilities
 - `fastparquet>=2024.11.0` - Parquet file support
 - `pandas>=2.3.3` - Data manipulation
 - `plotly>=5.18.0` - Interactive visualizations
@@ -117,21 +125,25 @@ Current project dependencies (from `pyproject.toml`):
 ## Benefits of Using uv
 
 ### Performance
+
 - Initial install: ~3-5 seconds vs 30+ with pip
 - Dependency resolution is 10-100x faster
 - Better caching of downloads
 
 ### Reliability
+
 - `uv.lock` guarantees everyone has exact same versions
 - Faster builds in CI/CD pipelines
 - No More "works on my machine" issues
 
 ### Developer Experience
+
 - Single tool for package + environment management
 - Clearer error messages
 - Simpler workflows
 
 ### Project Management
+
 - All config in one `pyproject.toml` file
 - Easy to add/remove dependencies
 - Clean separation of project vs development dependencies (when needed)
@@ -139,6 +151,7 @@ Current project dependencies (from `pyproject.toml`):
 ## Future Enhancements
 
 The uv setup makes it easy to:
+
 - Add development dependencies: `uv add --dev pytest`
 - Create separate dependency groups
 - Use `uv run` for guaranteed consistent script execution
@@ -147,7 +160,9 @@ The uv setup makes it easy to:
 ## Troubleshooting
 
 ### Issue: "uv not found"
+
 **Solution:** Install uv first
+
 ```bash
 # macOS/Linux
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -157,13 +172,17 @@ irm https://astral.sh/uv/install.ps1 | iex
 ```
 
 ### Issue: Virtual environment not created
+
 **Solution:** Run `uv sync`
+
 ```bash
 uv sync
 ```
 
 ### Issue: "old package not uninstalled"
+
 **Solution:** Update lockfile and reinstall
+
 ```bash
 uv sync --upgrade
 ```
@@ -171,6 +190,7 @@ uv sync --upgrade
 ## Verification
 
 To verify everything is working:
+
 ```bash
 # Check uv is installed and working
 uv --version

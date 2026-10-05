@@ -12,7 +12,7 @@ It is built on [Plotly Dash](https://dash.plotly.com/) and managed with [uv](htt
 ## Features
 
 | Feature | Description |
-|---|---|
+| --- | --- |
 | **Database Loading** | Load any SQLite `.sqlite` file by path |
 | **Table Browser** | View all tables with column names and row counts |
 | **Advanced Search** | Visual filter builder with 11 operators — no SQL required |

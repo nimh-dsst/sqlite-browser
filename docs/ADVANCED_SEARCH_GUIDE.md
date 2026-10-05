@@ -7,7 +7,7 @@ The SQLite Database Browser now includes a powerful advanced search interface wi
 ### Filter Types Supported
 
 | Operator | Description | Example |
-|----------|-------------|---------|
+| ---------- | ------------- | --------- |
 | **equals** | Exact match | `field = "value"` |
 | **does not equal** | Excludes matches | `field != "value"` |
 | **like (contains)** | Substring search with wildcards | `field LIKE "%substr%"` |
@@ -40,7 +40,7 @@ The SQLite Database Browser now includes a powerful advanced search interface wi
 
 The Advanced Search section provides a modular filter builder:
 
-```
+```text
 ┌─────────────────────────────────────────────────────────┐
 │ Advanced Search                                           │
 │ Build complex queries with multiple filters (AND logic)  │
@@ -52,7 +52,7 @@ The Advanced Search section provides a modular filter builder:
 └─────────────────────────────────────────────────────────┘
 ```
 
-#### Step-by-Step Process:
+#### Step-by-Step Process
 
 1. **Select a Field**: Click the first dropdown and choose a column name
 2. **Choose an Operator**: Select from the 11 available operators
@@ -76,31 +76,36 @@ Results appear in three tabs:
 ## Search Examples
 
 ### Example 1: Simple Equals Search
+
 Find all participants with a specific MRN:
 
-```
+```text
 Field: "mrn_id"
 Operator: equals
 Value: "04M0222"
 ```
+
 **Generates SQL**: `SELECT * FROM participants WHERE "mrn_id" = "04M0222"`
 
 ### Example 2: Substring Search (Contains)
+
 Find all entries containing "moa" in the dataset field:
 
-```
+```text
 Field: "ds_dataset"
 Operator: like (contains)
 Value: "moa"
 ```
+
 **Generates SQL**: `SELECT * FROM data WHERE "ds_dataset" LIKE "%moa%"`
 
 This will match: "moa_3T", "MOA_7T", "moa_baseline", etc.
 
 ### Example 3: Multiple Filters (AND Logic)
+
 Find participants over 30 years old AND from study group "A":
 
-```
+```text
 Filter 1:
   Field: "age"
   Operator: greater than
@@ -111,26 +116,31 @@ Filter 2:
   Operator: equals
   Value: "A"
 ```
+
 **Generates SQL**: `SELECT * FROM participants WHERE "age" > 30 AND "study_group" = "A"`
 
 ### Example 4: IN Operator
+
 Find records matching any of multiple values:
 
-```
+```text
 Field: "status"
 Operator: in
 Value: "active, pending, review"
 ```
+
 **Generates SQL**: `SELECT * FROM data WHERE "status" IN (active, pending, review)`
 
 ### Example 5: NULL Checking
+
 Find records with missing data:
 
-```
+```text
 Field: "optional_field"
 Operator: is null
 Value: (leave empty)
 ```
+
 **Generates SQL**: `SELECT * FROM data WHERE "optional_field" IS NULL`
 
 ## Advanced Usage
@@ -139,7 +149,7 @@ Value: (leave empty)
 
 Build complex queries by adding multiple filters. All filters are combined with **AND** logic:
 
-```
+```text
 Filter 1: age >= 18
 Filter 2: age <= 65
 Filter 3: status = "active"
@@ -158,7 +168,7 @@ Filter 4: department LIKE "%research%"
 
 After applying filters, the exact SQL query is displayed in the results section:
 
-```
+```text
 SQL: SELECT * FROM "particles" WHERE "age" > 25 AND "status" LIKE "%active%"
 ```
 
@@ -192,26 +202,32 @@ The filter builder covers 80% of use cases, but the custom query section is avai
 ### Common Patterns
 
 **Find duplicates:**
+
 - Use custom SQL: `SELECT field, COUNT(*) FROM table GROUP BY field HAVING COUNT(*) > 1`
 
 **Exclude values:**
+
 - Use "does not equal" or "NOT LIKE"
 
 **Range queries:**
+
 - Use two filters: `age >= 18` AND `age <= 65`
 
 **Partial matches:**
+
 - Use "like (contains)" for text fields
 
 ### When to Use Filters vs. Custom Queries
 
 **Use the Filter Builder when:**
+
 - Searching for simple conditions
 - Need quick, interactive exploration
 - Want to avoid writing SQL
 - Learning what data exists
 
 **Use Custom Queries when:**
+
 - Need aggregations (COUNT, SUM, AVG, etc.)
 - Joining multiple tables
 - Complex nested conditions
@@ -220,22 +236,26 @@ The filter builder covers 80% of use cases, but the custom query section is avai
 ## Troubleshooting
 
 ### "No results found"
+
 - Check for typos in your search values
 - Try a less restrictive search (fewer filters or broader text)
 - Remember: text matching is case-sensitive
 
 ### Filter field dropdown empty
+
 - Make sure you selected a table first ("Load Table")
 - Check the database has columns
 - Reload the table
 
 ### Query runs slowly
+
 - Too many filters with LIKE operators?
 - Try using numeric operators (faster)
 - Reduce dataset before visualizing
 - Use custom SQL with LIMIT clause
 
 ### Special characters in search values
+
 - For text with quotes: the app handles escaping automatically
 - For comma-separated "IN" values: values with commas need quotes in custom SQL
 
@@ -244,7 +264,8 @@ The filter builder covers 80% of use cases, but the custom query section is avai
 ### Text Matching
 
 **Exact Match:**
-```
+
+```text
 Field: "category"
 Operator: equals
 Value: "A"
@@ -252,7 +273,8 @@ Result: category = "A"
 ```
 
 **Contains (Substring):**
-```
+
+```text
 Field: "name"
 Operator: like (contains)
 Value: "john"
@@ -261,7 +283,8 @@ Matches: "john", "John", "John Smith", "johnson"
 ```
 
 **Multiple Values:**
-```
+
+```text
 Field: "status"
 Operator: in
 Value: "active, pending, approved"
@@ -271,7 +294,8 @@ Result: status IN ('active', 'pending', 'approved')
 ### Numeric Comparisons
 
 All support numbers (integers and decimals):
-```
+
+```text
 Field: "age"
 Operator: greater than
 Value: "25"
@@ -281,7 +305,8 @@ Result: age > 25
 ### NULL Checks
 
 Find missing/empty values:
-```
+
+```text
 Field: "optional_data"
 Operator: is null
 Value: (ignored)
@@ -291,6 +316,7 @@ Result: optional_data IS NULL
 ## Architecture Notes
 
 The filter builder:
+
 - Creates dynamic filter UI with add/remove buttons
 - Stores filter state in browser (Dash Store)
 - Builds parameterized SQL queries (safe from injection)

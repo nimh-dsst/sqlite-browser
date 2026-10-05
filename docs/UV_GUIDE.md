@@ -7,6 +7,7 @@ This project uses [uv](https://github.com/astral-sh/uv) for dependency managemen
 `uv` is a fast, Rust-based Python package installer and virtual environment manager. It's designed to be a replacement for pip, pip-tools, pipenv, and venv.
 
 **Benefits:**
+
 - ⚡ **Fast** - 10-100x faster than pip
 - 🔒 **Deterministic** - Consistent installs across machines
 - 📦 **Integrated** - Handles both packages and environments
@@ -31,6 +32,7 @@ uv run pip list
 ## Common Commands
 
 ### Setup
+
 ```bash
 # Initial sync (creates .venv and installs packages)
 uv sync
@@ -40,6 +42,7 @@ uv sync --upgrade
 ```
 
 ### Running Code
+
 ```bash
 # Run the Dash app
 uv run dash_app.py
@@ -52,6 +55,7 @@ uv run python quickstart.py
 ```
 
 ### Adding Dependencies
+
 ```bash
 # Add a new package to the project
 uv add pandas-profiling
@@ -64,6 +68,7 @@ uv add "requests==2.31.0"
 ```
 
 ### Modifying Dependencies
+
 ```bash
 # Remove a package
 uv remove package-name
@@ -119,7 +124,9 @@ uv tree
 ## Troubleshooting
 
 ### "uv: command not found"
+
 Install uv:
+
 ```bash
 # macOS/Linux
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -129,23 +136,29 @@ irm https://astral.sh/uv/install.ps1 | iex
 ```
 
 ### "No such file or directory: '.venv/bin/python'"
+
 This means `.venv` wasn't created. Run:
+
 ```bash
 uv sync
 ```
 
 ### Dependency conflicts
+
 Use `--upgrade` to get the latest versions:
+
 ```bash
 uv sync --upgrade
 ```
 
 ### Windows OneDrive hardlink error (os error 396)
+
 If your project is inside a OneDrive-synced directory, hardlink creation can fail during install.
 
 This project sets `link-mode = "copy"` in `pyproject.toml` under `[tool.uv]` so `uv sync` works reliably.
 
 If you still see this issue locally, run:
+
 ```bash
 uv sync --link-mode=copy
 ```
@@ -153,16 +166,19 @@ uv sync --link-mode=copy
 ## Development Workflow
 
 1. **First time setup:**
+
    ```bash
    uv sync
    ```
 
 2. **Start development:**
+
    ```bash
    uv run dash_app.py
    ```
 
 3. **Add a new dependency:**
+
    ```bash
    uv add new-package-name
    ```
@@ -187,9 +203,9 @@ The old `requirements_dash.txt` is deprecated - all dependencies are now in `pyp
 
 ## Additional Resources
 
-- **Official uv docs:** https://docs.astral.sh/uv/
-- **GitHub repository:** https://github.com/astral-sh/uv
-- **FAQ:** https://docs.astral.sh/uv/guides/
+- **Official uv docs:** <https://docs.astral.sh/uv/>
+- **GitHub repository:** <https://github.com/astral-sh/uv>
+- **FAQ:** <https://docs.astral.sh/uv/guides/>
 
 ## Tips
 

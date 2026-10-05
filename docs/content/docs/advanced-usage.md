@@ -10,7 +10,7 @@ description: "Filter operators, worked examples, and custom SQL query patterns."
 The filter builder supports 11 operators covering the most common query patterns.
 
 | Operator | SQL equivalent | Best for |
-|---|---|---|
+| --- | --- | --- |
 | **equals** | `col = "value"` | Exact match on a known value |
 | **does not equal** | `col != "value"` | Excluding a specific value |
 | **like (contains)** | `col LIKE "%value%"` | Substring / partial-string search |
@@ -31,7 +31,7 @@ All conditions added with **+ Add Filter** are combined with `AND`.
 
 Find all rows where `ent__sub` contains `"MOA"`:
 
-```
+```text
 Field:    ent__sub
 Operator: like (contains)
 Value:    MOA
@@ -41,7 +41,7 @@ Value:    MOA
 
 Participants over 30 with an active status:
 
-```
+```text
 Filter 1 — Field: age       Operator: greater than   Value: 30
 Filter 2 — Field: status    Operator: equals         Value: active
 ```
@@ -50,7 +50,7 @@ Filter 2 — Field: status    Operator: equals         Value: active
 
 Find rows where `optional_field` has no value:
 
-```
+```text
 Field:    optional_field
 Operator: is null
 (no value needed)
@@ -60,7 +60,7 @@ Operator: is null
 
 Rows where `site` is one of several known values:
 
-```
+```text
 Field:    site
 Operator: in
 Value:    siteA, siteB, siteC

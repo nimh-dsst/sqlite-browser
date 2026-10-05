@@ -21,7 +21,7 @@ uv run python utilities/db_join.py DATABASE CSV_FILE -k DB_KEY -c CSV_KEY [optio
 ### Required arguments
 
 | Argument | Description |
-|---|---|
+| --- | --- |
 | `DATABASE` | Path to the existing `.sqlite` file |
 | `CSV_FILE` | Path to the TSV or CSV file to join in |
 | `-k` / `--db-key` | Column name **in the database table** to join on |
@@ -30,7 +30,7 @@ uv run python utilities/db_join.py DATABASE CSV_FILE -k DB_KEY -c CSV_KEY [optio
 ### Optional arguments
 
 | Argument | Default | Description |
-|---|---|---|
+| --- | --- | --- |
 | `-t` / `--table` | `data` | Name of the database table to read from |
 | `-j` / `--join-type` | `outer` | Join type: `left`, `right`, `inner`, or `outer` |
 | `-o` / `--output-table` | `data` | Name of the table to write the joined result to |

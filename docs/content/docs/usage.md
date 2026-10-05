@@ -9,7 +9,7 @@ description: "A walkthrough of the full SQLite Browser workflow."
 
 Enter the full path to your `.sqlite` file in the **Database path** field and click **Load**.
 
-```
+```text
 C:\path\to\database.sqlite
 ./data/my_db.sqlite
 ```
@@ -47,7 +47,7 @@ See [Advanced Usage]({{< relref "advanced-usage" >}}) for example queries.
 Switch between tabs to dig deeper into your data:
 
 | Tab | What it shows |
-|---|---|
+| --- | --- |
 | **Table View** | Paginated query results |
 | **Summary** | Per-column profile: missingness, unique count, top values, min/max, data type |
 | **Counts** | Categorical combination counts. Use **Aggregate counts by** to choose grouping columns. Sort any column with the **Asc/Desc** controls. Treemap and sunburst charts show distribution across multi-value fields. |

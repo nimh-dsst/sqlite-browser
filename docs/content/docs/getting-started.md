@@ -34,7 +34,7 @@ uv run python dash_app.py
 
 Open your browser and navigate to:
 
-```
+```text
 http://127.0.0.1:8050
 ```
 
