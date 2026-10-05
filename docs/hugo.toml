@@ -6,10 +6,9 @@ enableMissingTranslationPlaceholders = true
 enableRobotsTXT = true
 enableGitInfo = true
 
-[module]
-  proxy = "direct"
-  [[module.imports]]
-    path = "github.com/google/docsy"
+# Docsy is installed as an npm package (see package.json).
+theme = "@docsy/theme"
+themesDir = "node_modules"
 
 [params]
   description = "A Plotly Dash web application for exploring SQLite databases."
