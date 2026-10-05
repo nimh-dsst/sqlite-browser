@@ -142,6 +142,24 @@ SELECT condition, COUNT(*) as count FROM "data" GROUP BY condition
 
 - By default, queries are limited to the first 500 rows to prevent memory issues with large databases
 
+## Project Layout
+
+`dash_app.py` is a thin entry point that creates the app and sets the layout. Each feature lives in its own module under `src/`, holding that feature's layout section, helpers, and callbacks (registered with Dash's global `@callback` on import):
+
+| Module | Contents |
+| --- | --- |
+| `src/database.py` | `DatabaseConnection`, `FILTER_OPERATORS`, SQL helpers |
+| `src/components.py` | Shared table rendering and column-selection helpers |
+| `src/layout.py` | `build_layout()`: assembles sections and hidden stores |
+| `src/loading.py` | Load Database and Tables sections |
+| `src/filters.py` | Advanced Search filter builder |
+| `src/query.py` | Execute Custom Query section |
+| `src/columns.py` | Column Display section |
+| `src/results.py` | Results tabs: Table View, Statistics, Visualizations |
+| `src/summary.py` | Summary tab |
+| `src/counts.py` | Counts tab |
+| `src/export.py` | Export section |
+
 ## Limitations
 
 - Read-only access (no INSERT/UPDATE/DELETE)

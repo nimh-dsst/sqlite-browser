@@ -35,7 +35,7 @@ This document summarizes the conversion of the dataset-browser project to use `u
   - Standard Python cache files ignored
 
 ### Application Files
-- **`dash_app.py`** - Main Dash application
+- **`dash_app.py`** - Main Dash application entry point (feature modules live in `src/`; see the README's Project Layout)
   - Fixed import to remove unused `FileSystemStore`
   - All required packages now properly imported and available
   

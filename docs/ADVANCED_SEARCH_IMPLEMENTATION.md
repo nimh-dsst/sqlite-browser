@@ -7,6 +7,7 @@ A complete advanced, modular search interface with a powerful filter builder to 
 ## Key Features Implemented
 
 ### 1. **11 Filter Operators**
+
 - `equals` - Exact match
 - `does not equal` - Exclusion
 - `like (contains)` - Substring search (handles wildcards automatically)
@@ -18,7 +19,8 @@ A complete advanced, modular search interface with a powerful filter builder to 
 - `is not null` - Exclude NULL values
 
 ### 2. **Modular Filter Builder UI**
-```
+
+```text
 [Load Database] → [Select Table] → [Advanced Search] → [Results]
                                        ↓
                                   [Field] [Operator] [Value] [✕]
@@ -27,6 +29,7 @@ A complete advanced, modular search interface with a powerful filter builder to 
 ```
 
 **Features:**
+
 - Dynamic field selection (auto-populated from selected table)
 - Operator dropdown with all 11 options
 - Value input field with context-aware behavior
@@ -34,17 +37,20 @@ A complete advanced, modular search interface with a powerful filter builder to 
 - Clear all filters at once
 
 ### 3. **Multi-Filter AND Logic**
+
 - All filters are combined with AND operator
 - Multiple conditions must all be true
 - Example: `age > 25 AND status = "active" AND name LIKE "%john%"`
 
 ### 4. **SQL Generation & Preview**
+
 - Generates safe, parameterized SQL queries
 - Displays the exact SQL being executed
 - Shows row count, column count, and execution time
 - SQL visible in the results section for transparency and reuse
 
 ### 5. **Dynamic Column Population**
+
 - When you load a table, filter field selectors automatically populate
 - Only shows columns that actually exist
 - Updates when you switch tables
@@ -54,11 +60,13 @@ A complete advanced, modular search interface with a powerful filter builder to 
 ### DatabaseConnection Class Enhancements
 
 **New Methods:**
+
 - `build_where_clause(filters)` - Converts filter objects to SQL WHERE clause with parameters
 - `get_table_data(table_name, filters)` - Executes filtered queries with safe parameter binding
 - `get_columns(table_name)` - Returns available columns for the table
 
 **Key Implementation:**
+
 ```python
 def build_where_clause(self, filters: List[Dict]) -> Tuple[str, List]:
     """Builds parameterized SQL WHERE clause from filter objects"""
@@ -71,6 +79,7 @@ def build_where_clause(self, filters: List[Dict]) -> Tuple[str, List]:
 ### UI Components
 
 **Filter Row Template:**
+
 ```python
 def create_filter_row(filter_id: int) -> dbc.Row
     # Returns a row with:
@@ -83,11 +92,13 @@ def create_filter_row(filter_id: int) -> dbc.Row
 ### Callbacks
 
 **Filter Management:**
+
 - `add_filter()` - Handles adding new filter rows
 - `remove_filter()` - Removes individual filter rows
 - `update_filter_field_options()` - Updates field dropdowns when table changes
 
 **Query Execution:**
+
 - `apply_filters()` - Main callback that builds and executes filtered queries
 - Shows results, statistics, and visualizations
 
@@ -109,6 +120,7 @@ def create_filter_row(filter_id: int) -> dbc.Row
 ### SQL Generation Example
 
 **Filter Input:**
+
 ```python
 filters = [
     {"field": "age", "operator": "greater_than", "value": "25"},
@@ -118,12 +130,14 @@ filters = [
 ```
 
 **Generated SQL:**
+
 ```sql
 WHERE "age" > ? AND "status" = ? AND "name" LIKE ?
 Parameters: [25, "active", "%john%"]
 ```
 
 **Full Query:**
+
 ```sql
 SELECT * FROM "participants" 
 WHERE "age" > ? AND "status" = ? AND "name" LIKE ? 
@@ -133,6 +147,7 @@ LIMIT 1000
 ## Operator Implementation Details
 
 ### Text Operators
+
 - **equals**: Exact string match with `=`
 - **does not equal**: `!=` operator
 - **like (contains)**: Wraps value in `%` for substring: `LIKE "%value%"`
@@ -140,17 +155,20 @@ LIMIT 1000
 - **in**: Splits comma-separated values, generates `IN (?, ?, ?)`
 
 ### Numeric Operators
+
 - **less_than**, **less_than_or_equal**, **greater_than**, **greater_than_or_equal**
 - Value converted to float automatically
 - Supports decimals, negatives
 
 ### NULL Operators
+
 - **is_null**: `field IS NULL` (no value parameter needed)
 - **is_not_null**: `field IS NOT NULL` (no value parameter needed)
 
 ## Integration with Existing Features
 
 The advanced search **coexists** with custom SQL:
+
 - Use filter builder for 80% of queries
 - Use custom SQL section for complex operations (joins, aggregations, etc.)
 - Both can view results in the same way
@@ -164,6 +182,7 @@ The advanced search **coexists** with custom SQL:
    - Added new layout section for "Advanced Search"
    - Added 8 new callbacks for filter management
    - Updated store components
+   - `FILTER_OPERATORS` and `DatabaseConnection` live in `src/database.py`; the filter builder layout, `create_filter_row()`, and filter callbacks live in `src/filters.py`
 
 2. **DASH_APP_README.md**
    - Updated features section
@@ -184,13 +203,15 @@ The advanced search **coexists** with custom SQL:
 ## Usage Example
 
 ### Traditional Workflow (Before)
+
 1. User manually writes SQL
 2. High error rate, typos
 3. Need to know SQL syntax
 4. Limited to SELECT queries
 
 ### Advanced Workflow (After)
-```
+
+```text
 Load DB → Select Table → Click field dropdown → Pick "age"
 → Click operator → Pick "greater_than" 
 → Type value "25" 
@@ -224,6 +245,7 @@ No SQL knowledge required!
 - **Safe LIKE**: Automatic % wrapping prevents unintended patterns
 
 Example safe query:
+
 ```python
 query = 'SELECT * FROM "table" WHERE "field" LIKE ?'
 params = ["%search%"]
