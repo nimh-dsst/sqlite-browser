@@ -24,6 +24,10 @@ Choose a table from the dropdown and click **Load Table**. The app shows:
 - The total row count
 - Populated filter field selectors ready for use
 
+The first 500 rows also appear in the **Table View** tab, along with the SQL that produced them.
+
+![Table View tab showing the first 500 rows of all 56 columns and the generated SQL](/images/table_view.png)
+
 ## 3. Filter with Advanced Search
 
 The **Advanced Search** section lets you build multi-condition queries without writing SQL.
@@ -42,19 +46,17 @@ Use the **Execute Custom Query** section to write any SQL you need. Click **Exec
 
 See [Advanced Usage]({{< relref "advanced-usage" >}}) for example queries.
 
-## 5. Analyze and explore
+## 5. Choose columns to display (optional)
 
-Switch between tabs to dig deeper into your data:
+Click **Toggle** in the **Column Display** section to open the column checklist. Check the columns you want, or use **Select All** / **Clear All**. Unchecked columns are hidden from the table and left out of every analysis tab.
 
-| Tab | What it shows |
-| --- | --- |
-| **Table View** | Paginated query results |
-| **Summary** | Per-column profile: missingness, unique count, top values, min/max, data type |
-| **Counts** | Categorical combination counts. Use **Aggregate counts by** to choose grouping columns. Sort any column with the **Asc/Desc** controls. Treemap and sunburst charts show distribution across multi-value fields. |
-| **Statistics** | Descriptive statistics for numeric columns |
-| **Visualizations** | Histograms, bar charts, and scatter plots. Select a column and chart type to render. |
+![Column Display checklist with 8 columns selected, and the Table View showing only those columns](/images/column_display_and_table_view.png)
 
-## 6. Export results
+## 6. Analyze and explore
+
+Switch between the **Table View**, **Summary**, **Counts**, **Statistics**, and **Visualizations** tabs to dig deeper into your data. See [Exploring Results]({{< relref "exploring-results" >}}) for what each tab shows.
+
+## 7. Export results
 
 Click **Export to TSV** to download your current filtered or queried results as a tab-separated file. The exported file includes the SQL query that produced it.
 

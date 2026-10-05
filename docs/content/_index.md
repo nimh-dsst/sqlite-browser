@@ -27,6 +27,10 @@ with a visual query builder, run custom SQL, and visualize your data — all fro
 with no installation beyond Python.
 {{% /blocks/lead %}}
 
+{{% blocks/section color="white" %}}
+![SQLite Browser with a database loaded, showing the Tables, Advanced Search, Custom Query, Column Display, and Export panels](/images/browser.png)
+{{% /blocks/section %}}
+
 {{< blocks/section color="dark" type="row" >}}
 
 {{% blocks/feature icon="fas fa-database" title="Instant Database Access" %}}
@@ -56,6 +60,8 @@ no coding or data wrangling required.
 {{% blocks/feature icon="fas fa-chart-pie" title="Counts & Summary Stats" %}}
 Explore categorical distributions with interactive treemap and sunburst charts.
 View per-column missingness, unique value counts, and min/max ranges.
+
+![Treemap and sunburst charts of category counts from the Counts tab](/images/category_counts.png)
 {{% /blocks/feature %}}
 
 {{% blocks/feature icon="fas fa-download" title="Export Results" %}}

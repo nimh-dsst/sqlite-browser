@@ -1,0 +1,7 @@
+{{- /* Resolve site-root paths like /images/x.png against baseURL so they work under the GitHub Pages subpath. */ -}}
+{{- $src := .Destination -}}
+{{- if and (hasPrefix $src "/") (not (hasPrefix $src "//")) -}}
+  {{- $src = strings.TrimPrefix "/" $src | relURL -}}
+{{- end -}}
+<a href="{{ $src }}"><img src="{{ $src }}" alt="{{ .PlainText }}"{{ with .Title }} title="{{ . }}"{{ end }} class="img-fluid d-block mx-auto my-4 border rounded shadow-sm" loading="lazy"></a>
+{{- /**/ -}}

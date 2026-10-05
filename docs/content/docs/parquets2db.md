@@ -102,7 +102,7 @@ All matched Parquet files are read with `pandas.read_parquet()` and concatenated
 
 Open `db.sqlite` in SQLite Browser. You should see a `data` table with all rows from every matched Parquet file combined.
 
-![SQLite Browser showing the data table from a bids2table-generated db.sqlite file, with sample rows and columns visible in the Table View](../../assets/images/table_view.png)
+![SQLite Browser showing the data table from a bids2table-generated db.sqlite file, with sample rows and columns visible in the Table View](/images/table_view.png)
 
 ## Notes
 

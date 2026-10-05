@@ -9,6 +9,8 @@ SQLite Browser is a Python web application for loading, querying, and visualizin
 
 It is built on [Plotly Dash](https://dash.plotly.com/) and managed with [uv](https://docs.astral.sh/uv/).
 
+![SQLite Browser with a database loaded, showing the Tables, Advanced Search, Custom Query, Column Display, and Export panels](/images/browser.png)
+
 ## Features
 
 | Feature | Description |
