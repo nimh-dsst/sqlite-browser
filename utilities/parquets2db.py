@@ -7,11 +7,68 @@
 ###
 
 import argparse
+import json
 import os
+import numpy
 import pandas
 import sqlite3
 from glob import glob
 from pathlib import Path
+
+# Python types produced by pandas for nested Parquet columns (struct, list, map)
+NESTED_TYPES = (dict, list, tuple, numpy.ndarray)
+
+
+def _json_default(obj):
+    """Convert values that ``json.dumps`` can't handle natively.
+
+    Parameters
+    ----------
+    obj : object
+        A value found inside a nested Parquet cell.
+
+    Returns
+    -------
+    object
+        A JSON-serializable equivalent of ``obj``.
+    """
+    if isinstance(obj, numpy.ndarray):
+        return obj.tolist()
+    if isinstance(obj, numpy.generic):
+        return obj.item()
+    if isinstance(obj, bytes):
+        return obj.decode("utf-8", errors="replace")
+    if hasattr(obj, "isoformat"):
+        return obj.isoformat()
+    return str(obj)
+
+
+def serialize_nested_columns(df):
+    """Convert nested cell values to JSON strings so SQLite can store them.
+
+    SQLite only accepts scalar values, but Parquet struct, list, and map
+    columns are read by pandas as dicts, arrays, and lists of tuples.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        DataFrame read from one or more Parquet files.
+
+    Returns
+    -------
+    pandas.DataFrame
+        The same DataFrame with nested values replaced by JSON text.
+    """
+    for col in df.columns:
+        if df[col].dtype != object:
+            continue
+        is_nested = df[col].map(lambda v: isinstance(v, NESTED_TYPES))
+        if is_nested.any():
+            df.loc[is_nested, col] = df.loc[is_nested, col].map(
+                lambda v: json.dumps(v, default=_json_default)
+            )
+    return df
+
 
 def main():
     parser = argparse.ArgumentParser(
@@ -54,6 +111,7 @@ def main():
             df = pandas.concat([df, new_df], ignore_index=True)
 
     if len(parquet_files) > 0:
+        df = serialize_nested_columns(df)
         conn = sqlite3.connect(str(args.output))
         df.to_sql("data", conn, if_exists="replace", index=False)
         conn.close()

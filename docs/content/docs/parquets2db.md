@@ -109,4 +109,5 @@ Open `db.sqlite` in SQLite Browser. You should see a `data` table with all rows 
 - The output file **must** have a `.sqlite` extension; the script exits with an error otherwise.
 - If the output file already exists and is write-protected, the script exits without overwriting it.
 - If no Parquet files are found for the glob pattern, the script exits with an error.
+- Nested Parquet columns (struct, list, map) are stored as JSON text, since SQLite only supports scalar values.
 - The glob pattern should usually be **"quoted"** in the shell to prevent the shell from expanding it before Python sees it.
