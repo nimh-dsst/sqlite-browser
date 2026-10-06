@@ -7,6 +7,8 @@ description: "Convert Parquet files into a browsable SQLite database using parqu
 
 `utilities/parquets2db.py` collects one or more Parquet files, concatenates them into a single table, and writes the result to a SQLite file that can be opened directly in SQLite Browser. While it was originally built around [bids2table](https://childmindresearch.github.io/bids2table/bids2table.html) outputs, it works with **any** Parquet files.
 
+> **Sidecar metadata:** bids2table v2 Parquet files don't include JSON sidecar metadata. To include it, build the SQLite file directly from the BIDS dataset with [bids2db.py]({{< relref "bids2db" >}}).
+
 ## Prerequisites
 
 - SQLite Browser dependencies installed (`uv sync` in the repo root)
