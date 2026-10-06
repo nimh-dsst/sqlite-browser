@@ -1,7 +1,8 @@
 ---
-title: "Creating a bids2table SQLite file"
-linkTitle: "Creating a SQLite file"
-weight: 55
+title: "Creating a SQLite file from Parquet files"
+linkTitle: "Creating a SQLite file from Parquet files"
+weight: 40
+aliases: ["/docs/parquets2db/"]
 description: "Convert Parquet files into a browsable SQLite database using parquets2db.py."
 ---
 

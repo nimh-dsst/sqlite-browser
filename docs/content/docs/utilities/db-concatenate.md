@@ -1,7 +1,8 @@
 ---
 title: "Concatenating SQLite files"
 linkTitle: "Concatenating SQLite files"
-weight: 58
+weight: 20
+aliases: ["/docs/db-concatenate/"]
 description: "Use db_concatenate.py to stack the same table from several SQLite files into one."
 ---
 

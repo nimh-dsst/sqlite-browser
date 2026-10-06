@@ -1,11 +1,12 @@
 ---
 title: "Enriching a SQLite database with a TSV join"
 linkTitle: "Joining a TSV file"
-weight: 60
+weight: 30
+aliases: ["/docs/db-join/"]
 description: "Use db_join.py to join a TSV or CSV file into an existing SQLite database table."
 ---
 
-After creating a SQLite file (see [Indexing a BIDS dataset]({{< relref "bids2db" >}}) or [Creating a SQLite file]({{< relref "parquets2db" >}})), you may want to enrich the `data` table with additional per-subject or per-session metadata stored in a separate TSV or CSV file — for example, a phenotype file or an ID-mapping file. `utilities/db_join.py` performs that join and writes the result back into the database.
+After creating a SQLite file (see [Indexing a BIDS dataset]({{< relref "bids2db" >}}) or [Creating a SQLite file from Parquet files]({{< relref "parquets2db" >}})), you may want to enrich the `data` table with additional per-subject or per-session metadata stored in a separate TSV or CSV file — for example, a phenotype file or an ID-mapping file. `utilities/db_join.py` performs that join and writes the result back into the database.
 
 ## Prerequisites
 
