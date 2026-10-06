@@ -1,6 +1,6 @@
 ---
-title: "Creating a SQLite file directly from a BIDS dataset"
-linkTitle: "Indexing a BIDS dataset"
+title: "Creating an SQLite file directly from a BIDS dataset"
+linkTitle: "From BIDS to an SQLite file"
 weight: 10
 aliases: ["/docs/bids2db/"]
 description: "Index a BIDS dataset with bids2table, including JSON sidecar metadata, into a SQLite file using bids2db.py."

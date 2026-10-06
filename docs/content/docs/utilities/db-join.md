@@ -1,6 +1,6 @@
 ---
-title: "Enriching a SQLite database with a TSV join"
-linkTitle: "Joining a TSV file"
+title: "Enriching an SQLite database with a TSV join"
+linkTitle: "Joining SQLite and TSV files"
 weight: 30
 aliases: ["/docs/db-join/"]
 description: "Use db_join.py to join a TSV or CSV file into an existing SQLite database table."

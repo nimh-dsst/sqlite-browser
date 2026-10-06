@@ -1,6 +1,6 @@
 ---
-title: "Creating a SQLite file from Parquet files"
-linkTitle: "Creating a SQLite file from Parquet files"
+title: "Creating an SQLite file from Parquet files"
+linkTitle: "Creating SQLite from Parquet"
 weight: 40
 aliases: ["/docs/parquets2db/"]
 description: "Convert Parquet files into a browsable SQLite database using parquets2db.py."
